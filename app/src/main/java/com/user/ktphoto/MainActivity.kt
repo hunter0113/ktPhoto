@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 var addcontent:String=""
                 //跳出新增視窗
                 val ad = AlertDialog.Builder(this)
-                ad.setTitle("新增日誌")
+                ad.setTitle("新增日誌 1/3")
                 ad.setMessage("輸入景點名稱")
                 val input = EditText(this)
                 ad.setView(input)
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                     addname = input.text.toString()
 
                     val ad = AlertDialog.Builder(this)
-                    ad.setTitle("新增日誌")
+                    ad.setTitle("新增日誌 2/3")
                     ad.setMessage("輸入url")
                     val input = EditText(this)
                     ad.setView(input)
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                         //儲存url
                         addurl = input.text.toString()
                         val ad = AlertDialog.Builder(this)
-                        ad.setTitle("新增日誌")
+                        ad.setTitle("新增日誌 3/3")
                         ad.setMessage("輸入內容")
                         val input = EditText(this)
                         ad.setView(input)
