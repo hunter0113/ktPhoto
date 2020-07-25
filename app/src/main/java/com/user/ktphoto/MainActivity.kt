@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.add -> {
-                var addname:String=""
-                var addurl:String=""
-                var addcontent:String=""
+                var addname:String
+                var addurl:String
+                var addcontent:String
                 //跳出新增視窗
                 val ad = AlertDialog.Builder(this)
                 ad.setTitle("新增日誌 1/3")
@@ -78,6 +78,15 @@ class MainActivity : AppCompatActivity() {
                     }
                     ad.show()
                 }
+                ad.show()
+                true
+            }
+
+            R.id.about ->{
+                val ad = AlertDialog.Builder(this)
+                ad.setTitle("資料來源")
+                ad.setMessage("http://www.sharetify.com/2016/01/40.html與維基百科")
+                ad.setPositiveButton("確認") { _, _ ->}
                 ad.show()
                 true
             }
