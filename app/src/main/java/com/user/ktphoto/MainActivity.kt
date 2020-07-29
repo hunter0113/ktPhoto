@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.recyclerView
+import kotlinx.android.synthetic.main.app_bar.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,81 +21,80 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.app_bar)
 
+        toolbar.inflateMenu(R.menu.bar_menu)
+        //即使選擇always仍有機會不生效，故activity再執行一次
+        toolbar.getMenu().findItem(R.id.add).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        toolbar.getMenu().findItem(R.id.about).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
+        toolbarClick()
         initData()
         mainfun ()
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-       menuInflater.inflate(R.menu.bar_menu,menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-            R.id.add -> {
-                var addname:String
-                var addurl:String
-                var addcontent:String
-                //跳出新增視窗
-                val ad = AlertDialog.Builder(this)
-                ad.setTitle("新增日誌 1/3")
-                ad.setMessage("輸入景點名稱")
-                val input = EditText(this)
-                ad.setView(input)
-                ad.setPositiveButton("下一步") { _, _ ->
-                    //儲存name
-                    addname = input.text.toString()
-
+    private fun toolbarClick(){
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.add -> {
+                    var addname:String
+                    var addurl:String
+                    var addcontent:String
+                    //跳出新增視窗
                     val ad = AlertDialog.Builder(this)
-                    ad.setTitle("新增日誌 2/3")
-                    ad.setMessage("輸入url")
+                    ad.setTitle("新增日誌 1/3")
+                    ad.setMessage("輸入景點名稱")
                     val input = EditText(this)
                     ad.setView(input)
-                    ad .setPositiveButton("下一步") { _, _ ->
-                        //儲存url
-                        addurl = input.text.toString()
+                    ad.setPositiveButton("下一步") { _, _ ->
+                        //儲存name
+                        addname = input.text.toString()
+
                         val ad = AlertDialog.Builder(this)
-                        ad.setTitle("新增日誌 3/3")
-                        ad.setMessage("輸入內容")
+                        ad.setTitle("新增日誌 2/3")
+                        ad.setMessage("輸入url")
                         val input = EditText(this)
                         ad.setView(input)
-                        ad .setPositiveButton("確認") { _, _ ->
-                            //儲存內容
-                            addcontent = input.text.toString()
+                        ad .setPositiveButton("下一步") { _, _ ->
+                            //儲存url
+                            addurl = input.text.toString()
+                            val ad = AlertDialog.Builder(this)
+                            ad.setTitle("新增日誌 3/3")
+                            ad.setMessage("輸入內容")
+                            val input = EditText(this)
+                            ad.setView(input)
+                            ad .setPositiveButton("確認") { _, _ ->
+                                //儲存內容
+                                addcontent = input.text.toString()
 
-                            if (addname!=null && addurl!=null && addcontent!=null) {
-                                items.add(Photo().apply {
-                                    title = addname
-                                    url = addurl; width = 640f;height = 400f;
-                                    introduction = addcontent
-                                })
-                                recyclerView.adapter!!.notifyDataSetChanged()
+                                if (addname!=null && addurl!=null && addcontent!=null) {
+                                    items.add(Photo().apply {
+                                        title = addname
+                                        url = addurl; width = 640f;height = 400f;
+                                        introduction = addcontent
+                                    })
+                                    recyclerView.adapter!!.notifyDataSetChanged()
+                                }
                             }
+                            ad.show()
                         }
                         ad.show()
                     }
                     ad.show()
+                    true
                 }
-                ad.show()
-                true
+                R.id.about ->{
+                    val ad = AlertDialog.Builder(this)
+                    ad.setTitle("資料來源")
+                    ad.setMessage("http://www.sharetify.com/2016/01/40.html與維基百科")
+                    ad.setPositiveButton("確認") { _, _ ->}
+                    ad.show()
+                    true
+                }
+                else -> false
             }
-
-            R.id.about ->{
-                val ad = AlertDialog.Builder(this)
-                ad.setTitle("資料來源")
-                ad.setMessage("http://www.sharetify.com/2016/01/40.html與維基百科")
-                ad.setPositiveButton("確認") { _, _ ->}
-                ad.show()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
-
     private fun initData(){
 
         items.add(Photo().apply {
