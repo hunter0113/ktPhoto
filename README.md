@@ -1,4 +1,4 @@
-# ktPhoto
+# ktPhotoAlbum
 
 - 採用Material Design設計瀑布流樣式
 - AppBarLayout支援響應滾動手勢的佈局
