@@ -6,4 +6,4 @@
 - BottomSheetDialog底部滑出詳細內容
 
 
-<img src="https://github.com/hunter0113/ktPhoto/blob/master/RecyclerView.gif" width="30%" height="30%"> <\t> <img src="https://github.com/hunter0113/ktPhoto/blob/master/BottomSheetBehavior.gif" width="30%" height="30%">  
+<img src="https://github.com/hunter0113/ktPhoto/blob/master/RecyclerView.gif" width="30%" height="30%">    <img src="https://github.com/hunter0113/ktPhoto/blob/master/BottomSheetBehavior.gif" width="30%" height="30%">  
